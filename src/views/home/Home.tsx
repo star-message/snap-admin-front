@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Stack, styled, Typography, StackProps } from '@mui/material';
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 import unfilledRadioIcon from '../../assets/unfilledRadio.svg';
 import filledRadioIcon from '../../assets/filledRadio.svg';
 import profileIcon from '../../assets/profile.svg';
@@ -82,6 +83,36 @@ export default function Home() {
           }}
         >
           <Typography sx={{ fontSize: '24px', fontWeight: 800 }}>WEEKLY USER RANKING</Typography>
+          <BarChart
+            width={411}
+            height={500}
+            data={[
+              {
+                name: 'Page A',
+                pv: 2400,
+              },
+              {
+                name: 'Page B',
+                pv: 1398,
+              },
+              {
+                name: 'Page C',
+                pv: 9800,
+              },
+              {
+                name: 'Page D',
+                pv: 3908,
+              },
+              {
+                name: 'Page E',
+                pv: 4800,
+              },
+            ]}
+          >
+            <XAxis dataKey="name" unit={5} />
+            <Legend />
+            <Bar dataKey="pv" fill="#8884d8" />
+          </BarChart>
         </CardStack>
         <Stack spacing="13px" sx={{ width: '100%' }}>
           <CardStack
@@ -112,7 +143,7 @@ export default function Home() {
           >
             <Typography sx={{ fontSize: '24px', fontWeight: 800 }}>DAILY MISSION</Typography>
             <Stack direction="row" spacing="13px" sx={{ marginLeft: '78px' }}>
-              {userInfo?.todayCnt === 0 && (
+              {!userInfo?.todayCnt && (
                 <>
                   <img src={unfilledRadioIcon} />
                   <img src={unfilledRadioIcon} />
