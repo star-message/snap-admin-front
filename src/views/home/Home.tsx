@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Stack, styled, Typography, StackProps } from '@mui/material';
 import unfilledRadioIcon from '../../assets/unfilledRadio.svg';
+import filledRadioIcon from '../../assets/filledRadio.svg';
 import profileIcon from '../../assets/profile.svg';
-import { axiosInstance } from '../../core/api/axios';
 import { userHttpClient } from '../../core/api/axios/user';
 
 const CardStack = styled((props: StackProps) => {
@@ -32,7 +32,6 @@ export default function Home() {
     todayCnt: number;
     userName: string;
   }>();
-  console.log(userInfo);
 
   // NOTE: query
 
@@ -113,10 +112,34 @@ export default function Home() {
           >
             <Typography sx={{ fontSize: '24px', fontWeight: 800 }}>DAILY MISSION</Typography>
             <Stack direction="row" spacing="13px" sx={{ marginLeft: '78px' }}>
-              {}
-              <img src={unfilledRadioIcon} />
-              <img src={unfilledRadioIcon} />
-              <img src={unfilledRadioIcon} />
+              {userInfo?.todayCnt === 0 && (
+                <>
+                  <img src={unfilledRadioIcon} />
+                  <img src={unfilledRadioIcon} />
+                  <img src={unfilledRadioIcon} />
+                </>
+              )}
+              {userInfo?.todayCnt === 1 && (
+                <>
+                  <img src={filledRadioIcon} />
+                  <img src={unfilledRadioIcon} />
+                  <img src={unfilledRadioIcon} />
+                </>
+              )}
+              {userInfo?.todayCnt === 2 && (
+                <>
+                  <img src={filledRadioIcon} />
+                  <img src={filledRadioIcon} />
+                  <img src={unfilledRadioIcon} />
+                </>
+              )}
+              {userInfo?.todayCnt === 3 && (
+                <>
+                  <img src={filledRadioIcon} />
+                  <img src={filledRadioIcon} />
+                  <img src={filledRadioIcon} />
+                </>
+              )}
             </Stack>
           </CardStack>
           <CardStack sx={{ height: '395px', padding: '323px 135px 36px' }}>
