@@ -36,7 +36,7 @@ export default function Home() {
       navigator('/login');
     } else {
       userHttpClient.getMyPage().then((response) => {
-        console.log(response.data.data);
+        console.log(response.data.response);
       });
     }
   }, []);
