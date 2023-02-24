@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Stack, styled, Typography, StackProps } from '@mui/material';
 import unfilledRadioIcon from '../../assets/unfilledRadio.svg';
 import profileIcon from '../../assets/profile.svg';
+import { axiosInstance } from '../../core/api/axios';
+import { userHttpClient } from '../../core/api/axios/user';
 
 const CardStack = styled((props: StackProps) => {
   return <Stack {...props}>{props.children}</Stack>;
@@ -21,12 +23,21 @@ export default function Home() {
   const userName = localStorage.getItem('userName');
   const teamName = localStorage.getItem('teamName');
 
+  // NOTE: state hooks
+  const [userInfo, setUserInfo] = useState();
+
+  // NOTE: query
+
   // NOTE: effect hooks
   useEffect(() => {
     const token = localStorage.getItem('token');
 
     if (!token) {
       navigator('/login');
+    } else {
+      userHttpClient.getMyPage().then((response) => {
+        console.log(response.data.data);
+      });
     }
   }, []);
 
