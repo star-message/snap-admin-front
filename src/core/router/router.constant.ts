@@ -5,9 +5,6 @@ export const ROUTER_MAP: { [k: string]: { path: string } } = {
   home: {
     path: '/',
   },
-  challenge: {
-    path: '/challenge',
-  },
   auth: {
     path: '/auth/kakao',
   },
