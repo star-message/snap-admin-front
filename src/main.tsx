@@ -5,7 +5,15 @@ import App from './App';
 import './index.css';
 import { QueryClient, QueryFunctionContext, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+import { ThemeProvider, createTheme } from '@mui/material';
 import { makeRequest } from './core/api/axios';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "'Poppins', sans-serif",
+  },
+});
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,8 +31,10 @@ export const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <RecoilRoot>
     <QueryClientProvider client={queryClient}>
-      <App />
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ThemeProvider theme={theme}>
+        <App />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </ThemeProvider>
     </QueryClientProvider>
   </RecoilRoot>
 );

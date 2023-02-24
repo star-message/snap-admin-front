@@ -17,11 +17,13 @@ export default function Login() {
         <Stack sx={{ marginTop: '144px' }}>
           <Stack sx={{ justifyContent: 'center', alignItems: 'center' }}>
             <Typography sx={{ fontSize: '150px', fontWeight: 800 }}>SNAPIT</Typography>
-            <Typography sx={{ fontSize: '20px', marginTop: '-30px' }}>
+            <Typography sx={{ fontSize: '20px', marginTop: '-30px', fontWeight: 600 }}>
               세상의 모든 사무직들과 그들의 손목을 위해
             </Typography>
             <Stack>
-              <Typography sx={{ fontSize: '20px', marginTop: '-12px', marginLeft: '1280px' }}>
+              <Typography
+                sx={{ fontSize: '20px', marginTop: '-12px', marginLeft: '1280px', fontWeight: 600 }}
+              >
                 립모션 장치가 필요해요!
               </Typography>
             </Stack>
