@@ -24,7 +24,15 @@ export default function Home() {
   const teamName = localStorage.getItem('teamName');
 
   // NOTE: state hooks
-  const [userInfo, setUserInfo] = useState();
+  const [userInfo, setUserInfo] = useState<{
+    email: string;
+    id: number;
+    score: string;
+    teamName: string;
+    todayCnt: number;
+    userName: string;
+  }>();
+  console.log(userInfo);
 
   // NOTE: query
 
@@ -36,7 +44,10 @@ export default function Home() {
       navigator('/login');
     } else {
       userHttpClient.getMyPage().then((response) => {
-        console.log(response.data.response);
+        if (response.data.response.todayCnt >= 3) {
+          response.data.response.todayCnt = 3;
+        }
+        setUserInfo(response.data.response);
       });
     }
   }, []);
@@ -102,6 +113,7 @@ export default function Home() {
           >
             <Typography sx={{ fontSize: '24px', fontWeight: 800 }}>DAILY MISSION</Typography>
             <Stack direction="row" spacing="13px" sx={{ marginLeft: '78px' }}>
+              {}
               <img src={unfilledRadioIcon} />
               <img src={unfilledRadioIcon} />
               <img src={unfilledRadioIcon} />
