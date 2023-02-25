@@ -62,7 +62,7 @@ export default function Home() {
   }, []);
 
   return (
-    <Box sx={{ padding: '108px 200px 182px' }}>
+    <Box height="100vh" sx={{ padding: '108px 120px 182px' }}>
       <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
         <Stack>
           <Typography sx={{ fontSize: '40px', fontWeight: 800, lineHeight: '60px' }}>
@@ -161,10 +161,15 @@ export default function Home() {
           </CardStack>
           <CardStack
             direction="row"
-            sx={{ height: '106px', padding: '35px 38px', justifyContent: 'center' }}
+            sx={{
+              padding: '35px 38px',
+              height: '106px',
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
           >
-            <Typography sx={{ fontSize: '24px', fontWeight: 800 }}>DAILY MISSION</Typography>
-            <Stack direction="row" spacing="13px" sx={{ marginLeft: '78px' }}>
+            <Typography sx={{ fontSize: '20px', fontWeight: 800 }}>DAILY MISSION</Typography>
+            <Stack direction="row" spacing="13px">
               {!userInfo?.todayCnt && (
                 <>
                   <img src={unfilledRadioIcon} />
@@ -196,7 +201,13 @@ export default function Home() {
             </Stack>
           </CardStack>
           <CardStack
-            sx={{ height: '395px', padding: '323px 135px 36px', backgroundColor: '#202223' }}
+            sx={{
+              height: '395px',
+              backgroundColor: '#202223',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+            }}
           >
             <Typography sx={{ fontSize: '24px', fontWeight: 800, color: '#FFF' }}>
               START EXERCISE
