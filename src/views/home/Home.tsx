@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Stack, styled, Typography, StackProps } from '@mui/material';
-import { Bar, BarChart, Legend, Tooltip, XAxis } from 'recharts';
+import { Bar, BarChart, Tooltip, XAxis } from 'recharts';
 import unfilledRadioIcon from '../../assets/unfilledRadio.svg';
 import filledRadioIcon from '../../assets/filledRadio.svg';
 import profileIcon from '../../assets/profile.svg';
 import { userHttpClient } from '../../core/api/axios/user';
 import RankImage from '../../assets/rank.png';
+import HandImage from '../../assets/hand.png';
 
 const CardStack = styled((props: StackProps) => {
   return <Stack {...props}>{props.children}</Stack>;
@@ -139,7 +140,13 @@ export default function Home() {
         <Stack spacing="13px" sx={{ width: '100%' }}>
           <CardStack
             direction="row"
-            sx={{ height: '137px', padding: '35px 38px', justifyContent: 'space-between' }}
+            sx={{
+              height: '137px',
+              padding: '35px 38px',
+              justifyContent: 'space-between',
+              backgroundColor: '#202223',
+              color: '#FFF',
+            }}
           >
             <Stack>
               <Typography sx={{ fontSize: '24px', fontWeight: 800 }}>USER PROFILE</Typography>
@@ -166,6 +173,8 @@ export default function Home() {
               height: '106px',
               display: 'flex',
               justifyContent: 'space-between',
+              backgroundColor: '#202223',
+              color: '#FFF',
             }}
           >
             <Typography sx={{ fontSize: '20px', fontWeight: 800 }}>DAILY MISSION</Typography>
@@ -203,13 +212,16 @@ export default function Home() {
           <CardStack
             sx={{
               height: '395px',
-              backgroundColor: '#202223',
+              backgroundColor: '#91B7F3',
               display: 'flex',
               justifyContent: 'flex-end',
               alignItems: 'center',
             }}
           >
-            <Typography sx={{ fontSize: '24px', fontWeight: 800, color: '#FFF' }}>
+            <img src={HandImage} />
+            <Typography
+              sx={{ fontSize: '24px', fontWeight: 800, color: '#FFF', marginTop: '38px' }}
+            >
               START EXERCISE
             </Typography>
           </CardStack>
