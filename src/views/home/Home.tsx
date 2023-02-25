@@ -67,7 +67,7 @@ export default function Home() {
       <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
         <Stack>
           <Typography sx={{ fontSize: '40px', fontWeight: 800, lineHeight: '60px' }}>
-            SNAP IT
+            SNAPIT
           </Typography>
           <Typography sx={{ fontSize: '14px', fontWeight: 600, lineHeight: '21px' }}>
             사무직들을 위한 손목운동 프로그램
