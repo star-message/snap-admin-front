@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Stack, styled, Typography, StackProps } from '@mui/material';
-import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, Legend, Tooltip, XAxis } from 'recharts';
 import unfilledRadioIcon from '../../assets/unfilledRadio.svg';
 import filledRadioIcon from '../../assets/filledRadio.svg';
 import profileIcon from '../../assets/profile.svg';
 import { userHttpClient } from '../../core/api/axios/user';
+import RankImage from '../../assets/rank.png';
 
 const CardStack = styled((props: StackProps) => {
   return <Stack {...props}>{props.children}</Stack>;
@@ -33,6 +34,10 @@ export default function Home() {
     todayCnt: number;
     userName: string;
   }>();
+  const [resultInfo, setResultInfo] = useState<{
+    privateResult: { email: string; score: number }[];
+    teamResult: { teamName: string; score: number }[];
+  }>();
 
   // NOTE: query
 
@@ -48,6 +53,10 @@ export default function Home() {
           response.data.response.todayCnt = 3;
         }
         setUserInfo(response.data.response);
+      });
+
+      userHttpClient.getResult().then((response) => {
+        setResultInfo(response.data);
       });
     }
   }, []);
@@ -76,6 +85,42 @@ export default function Home() {
           }}
         >
           <Typography sx={{ fontSize: '24px', fontWeight: 800 }}>WEEKLY TEAM RANKING</Typography>
+          <Stack
+            sx={{
+              height: '300px',
+              margin: '28px 0 26px',
+              backgroundImage: `url(${RankImage})`,
+              width: '100%',
+              alignItems: 'center',
+            }}
+          >
+            <Typography sx={{ fontSize: '24px', fontWeight: 700, marginTop: '70px' }}>
+              Hello world!
+            </Typography>
+            <Typography sx={{ fontSize: '14px', fontWeight: 700, marginTop: '4px' }}>
+              {resultInfo?.teamResult[0].teamName}
+            </Typography>
+          </Stack>
+
+          <Stack spacing="9px">
+            {resultInfo?.teamResult.map((item, index) => {
+              return (
+                <Stack
+                  key={item.score}
+                  direction="row"
+                  sx={{ justifyContent: 'space-between', alignItems: 'center' }}
+                >
+                  <Stack direction="row" spacing="21px" sx={{ alignItems: 'center' }}>
+                    <Typography sx={{ fontSize: '40px', fontWeight: 800 }}>{index + 1}</Typography>
+                    <Typography sx={{ fontSize: '18px', fontWeight: 800 }}>
+                      {item.teamName}
+                    </Typography>
+                  </Stack>
+                  <Typography sx={{ fontSize: '20px', fontWeight: 800 }}>{item.score}점</Typography>
+                </Stack>
+              );
+            })}
+          </Stack>
         </CardStack>
         <CardStack
           sx={{
@@ -83,36 +128,13 @@ export default function Home() {
           }}
         >
           <Typography sx={{ fontSize: '24px', fontWeight: 800 }}>WEEKLY USER RANKING</Typography>
-          <BarChart
-            width={411}
-            height={500}
-            data={[
-              {
-                name: 'Page A',
-                pv: 2400,
-              },
-              {
-                name: 'Page B',
-                pv: 1398,
-              },
-              {
-                name: 'Page C',
-                pv: 9800,
-              },
-              {
-                name: 'Page D',
-                pv: 3908,
-              },
-              {
-                name: 'Page E',
-                pv: 4800,
-              },
-            ]}
-          >
-            <XAxis dataKey="name" unit={5} />
-            <Legend />
-            <Bar dataKey="pv" fill="#8884d8" />
-          </BarChart>
+          <Stack sx={{ marginTop: '56px' }}>
+            <BarChart width={411} height={500} data={resultInfo?.privateResult}>
+              <XAxis dataKey="userName" />
+              <Tooltip />
+              <Bar dataKey="score" fill="#8884d8" barSize={69} />
+            </BarChart>
+          </Stack>
         </CardStack>
         <Stack spacing="13px" sx={{ width: '100%' }}>
           <CardStack
@@ -173,8 +195,12 @@ export default function Home() {
               )}
             </Stack>
           </CardStack>
-          <CardStack sx={{ height: '395px', padding: '323px 135px 36px' }}>
-            <Typography sx={{ fontSize: '24px', fontWeight: 800 }}>START EXERCISE</Typography>
+          <CardStack
+            sx={{ height: '395px', padding: '323px 135px 36px', backgroundColor: '#202223' }}
+          >
+            <Typography sx={{ fontSize: '24px', fontWeight: 800, color: '#FFF' }}>
+              START EXERCISE
+            </Typography>
           </CardStack>
         </Stack>
       </Stack>
